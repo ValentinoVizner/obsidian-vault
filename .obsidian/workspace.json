@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cheatsheets/databases/snowflake.md",
-                "mode": "preview",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -44,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl-work.md",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl-work.md",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl-work.md"
+                "file": "educations/rust/comprehensive-google-edition/day-1.md"
               }
             }
           },
@@ -188,7 +188,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "91555de065f641d9",
+  "active": "8534e8224c35a1c1",
   "lastOpenFiles": [
     "cheatsheets/databases/snowflake.md",
     "cheatsheets/kubernetes/kubectl.md",
