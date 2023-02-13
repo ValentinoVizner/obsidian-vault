@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "migrated": true,
+    "iconPacksPath": ".obsidian/plugins/obsidian-icon-folder/icons",
+    "fontSize": 16,
+    "emojiStyle": "twemoji",
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "FabRust",
+      "📽",
+      "FabLeanpub",
+      "🗒",
+      "🖼"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    }
+  },
+  "assets": "🖼",
+  "cheatsheets": "🗒",
+  "educations": "FabLeanpub",
+  "projects": "📽",
+  "educations/rust": {
+    "iconName": "FabRust",
+    "inheritanceIcon": "FabRust"
+  },
+  "projects/rust": {
+    "iconName": "FabRust",
+    "inheritanceIcon": "FabRust"
+  },
+  "cheatsheets/programming-languages/rust": "FabRust"
+}

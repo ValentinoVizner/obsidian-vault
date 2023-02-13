@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "74c974d58c0a0c4c",
+    "type": "split",
+    "children": [
+      {
+        "id": "bbd4828c2f70bb73",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eaecb74c6797732b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cheatsheets/kubernetes/kubectl.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "610ee632ce842aa1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cheatsheets/databases/snowflake.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "31b7a392a52e1f8d",
+    "type": "split",
+    "children": [
+      {
+        "id": "3684ed1240bc6ea3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dd23bbcd71165e80",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "25b52ebcc5559a40",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "15cd4f03a8cdb8f6",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "97c3bc9acd410136",
+    "type": "split",
+    "children": [
+      {
+        "id": "04bde224bb98ceb7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "75638e89fffaa756",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "cheatsheets/databases/snowflake.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1962c3a2039fb765",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "cheatsheets/databases/snowflake.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "94b3b86f95b3b727",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "5dd11ca379895a4b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "cheatsheets/databases/snowflake.md"
+              }
+            }
+          },
+          {
+            "id": "4b89d20479881f07",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "8534e8224c35a1c1",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "610ee632ce842aa1",
+  "lastOpenFiles": [
+    "cheatsheets/kubernetes/kubectl.md",
+    "cheatsheets/databases/snowflake.md",
+    "educations/rust/comprehensive-google-edition/day-1.md",
+    "cheatsheets/kubernetes/kubectx.md",
+    "educations/rust/comprehensive-google-edition/course-information.md",
+    "cheatsheets/kubernetes/k9s.md",
+    "cheatsheets/kubernetes/kubernetes.md",
+    "educations/rust/embedded-programming/embedded-programming.md",
+    "cheatsheets/kubernetes/k3s.md",
+    "2023-02-12.md"
+  ]
+}

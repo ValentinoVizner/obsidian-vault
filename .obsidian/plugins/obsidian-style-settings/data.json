@@ -1,0 +1,20 @@
+{
+  "obsidian-execute-code@@code-output-text-color": "#D6E4AA",
+  "obsidian-execute-code@@use-custom-output-color": true,
+  "ion@@base-h": 223,
+  "ion@@base-s": 70,
+  "ion@@base-l-p": 67,
+  "ion@@bloom-fct": 0.65,
+  "ion@@ion-threshold": 69,
+  "CG@@CG-workspace-background": true,
+  "CG@@CG-workspace-background-image": "CG-workspace-background-image-custom",
+  "CG@@CG-workspace-background-workspace-slider": 0.33,
+  "CG@@CG-workspace-background-blur": 0,
+  "CG@@CG-workspace-background-saturation": 1.2,
+  "CG@@no-codeblock-line-numbers": false,
+  "CG@@CG-hr": "CG-Pokeball-hr",
+  "CG@@title-heading": "Inter.",
+  "CG@@CG-workspace-background-image-custom-option": "url(\"https://images.wallpapersden.com/image/download/artistic-landscape-view_bGhlaGmUmZqaraWkpJRmbmdlrWZlbWU.jpg\")",
+  "things-style@@default-font-color": false,
+  "CG@@CG-workspace-background-brightness": 0.9
+}
