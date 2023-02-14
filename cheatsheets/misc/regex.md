@@ -5,3 +5,11 @@ RegEx can be used to check if a string contains the specified search pattern.
 
 ## Cheatsheet
 [regex-cheatsheet](https://quickref.me/regex)
+
+
+### Most common usage in VSCode
+
+Fo removing the Column Types from SQL DDL:
+```bash
+ .*
+```

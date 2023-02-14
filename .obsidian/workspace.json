@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "cheatsheets/misc/regex.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "cheatsheets/misc/regex.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "cheatsheets/misc/regex.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md"
+                "file": "cheatsheets/misc/regex.md"
               }
             }
           },
@@ -188,17 +188,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8534e8224c35a1c1",
+  "active": "610ee632ce842aa1",
   "lastOpenFiles": [
-    "cheatsheets/databases/snowflake.md",
+    "educations/rust/comprehensive-google-edition/day-1.md",
     "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectl-work.md",
-    "educations/rust/comprehensive-google-edition/day-1.md",
+    "cheatsheets/misc/regex.md",
+    "cheatsheets/Untitled.md",
+    "cheatsheets/databases/snowflake.md",
     "cheatsheets/kubernetes/kubectx.md",
     "educations/rust/comprehensive-google-edition/course-information.md",
     "cheatsheets/kubernetes/k9s.md",
-    "cheatsheets/kubernetes/kubernetes.md",
-    "educations/rust/embedded-programming/embedded-programming.md",
-    "cheatsheets/kubernetes/k3s.md"
+    "cheatsheets/kubernetes/kubernetes.md"
   ]
 }
