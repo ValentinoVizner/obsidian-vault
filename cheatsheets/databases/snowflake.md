@@ -24,12 +24,29 @@ Call the UDF:
 ```sql
 select addone(10);
 ```
-### Granting Privileges on the Function
+### Granting Privileges
 
+#### Functions
 For any role other than the owner of the function to call the function, the owner must grant the appropriate privileges to the role.
 
 The [GRANT](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege.html) statements for a Python UDF are essentially identical to the GRANT statements for other UDFs, such as JavaScript UDFs.
 
 ```sql
 GRANT USAGE ON FUNCTION my_python_udf(number, number) TO my_role;
+```
+
+#### Tables/Schema/Database
+On Table:
+```sql
+GRANT SELECT ON TABLE mydb.myschema.mytable to ROLE analyst;
+```
+
+On Schema
+```sql
+GRANT USAGE on schema MY_SCHEMA to ROLE role;
+```
+
+On Database
+```sql
+GRANT USAGE on database MY_DB to ROLE role;
 ```
