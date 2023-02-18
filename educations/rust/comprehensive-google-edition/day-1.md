@@ -85,9 +85,9 @@ Array assignment and access:
 
 ```rust
 fn main() {
-    let mut a: [i8; 10] = [23; 7];
-    a[5] = 6;
-    println!("a: {:?}", a);
+    let mut array: [i8; 7] = [23; 7];
+    array[5] = 6;
+    println!("array: {:?}", array);
 }
 ```
 
@@ -95,8 +95,8 @@ Tuple assignment and access:
 ```rust
 fn main() {
     let tuple: (i8, bool) = (0, false);
-    println!("1st index: {}", t.0);
-    println!("2nd index: {}", t.1);
+    println!("1st index: {}", tuple.0);
+    println!("2nd index: {}", tuple.1);
 }
 ```
 
@@ -227,3 +227,216 @@ fn main() {
     println!("new area: {}", rect.area());
 }
 ```
+
+## Exercise 1: Implicit Conversions
+Rust will not automatically apply _implicit conversions_ between types ([unlike C++](https://en.cppreference.com/w/cpp/language/implicit_conversion)). You can see this in a program like this
+```rust
+fn multiply(x: i8, y: i8) -> i8 {
+    x * y
+}
+
+fn main() {
+    let x: i16 = 15;
+    let y: i8 = 1000;
+
+    println!("{x} * {y} = {}", multiply(x.into(), y.into())); // without into, Rust will throw an error as types From and Into do not match
+}
+```
+The Rust integer types all implement the [`From<T>`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into<T>`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits to let us convert between them. The `From<T>` trait has a single `from()` method and similarly, the `Into<T>` trait has a single `into()` method.
+
+The standard library has an implementation of `From<i8> for i16`, which means that we can convert a variable `x` of type `i8` to an `i16` by calling `i16::from(x)`. Or, simpler, with `x.into()`, because `From<i8> for i16` implementation automatically create an implementation of `Into<i16> for i8`.
+
+## Exercise 2: Arrays and `for` Loops
+You can print an array by asking for its debug representation with `{:?}`:
+```rust
+fn main() {
+    let array = [10, 20, 30];
+    println!("array: {array:?}");
+}
+```
+
+Rust lets you iterate over things like arrays and ranges using the `for` keyword:
+```rust
+fn main() {
+    let array = [10, 20, 30];
+    print!("Iterating over array:");
+    for n in array {
+        print!(" {n}");
+    }
+    println!();
+
+    print!("Iterating over range:");
+    for i in 0..3 {
+        print!(" {}", array[i]);
+    }
+    println!();
+}
+```
+
+Use the above to write a function `pretty_print` which pretty-print a matrix and a function `transpose` which will transpose a matrix (turn rows into columns).
+```rust
+// TODO: remove this when you're done with your implementation.
+#![allow(unused_variables, dead_code)]
+
+fn transpose(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
+    unimplemented!()
+}
+
+fn pretty_print(matrix: &[[i32; 3]; 3]) {
+    unimplemented!()
+}
+
+fn main() {
+    let matrix = [
+        [101, 102, 103], // <-- the comment makes rustfmt add a newline
+        [201, 202, 203],
+        [301, 302, 303],
+    ];
+
+    println!("matrix:");
+    pretty_print(&matrix);
+
+    let transposed = transpose(matrix);
+    println!("transposed:");
+    pretty_print(&transposed);
+}
+```
+Solution
+```rust
+
+fn transpose(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
+    let mut transposed_matrix = [[0; 3]; 3];
+    for i in 0..3 {
+        for j in 0..3 {
+            transposed_matrix[j][i] = matrix[i][j];
+        }
+    }
+    return transposed_matrix;
+}
+
+fn pretty_print(matrix: &[[i32; 3]; 3]) {
+    for row in matrix {
+        println!("{row:?}");
+    }
+}
+
+fn main() {
+    let matrix = [
+        [101, 102, 103], // <-- the comment makes rustfmt add a newline
+        [201, 202, 203],
+        [301, 302, 303],
+    ];
+
+    println!("matrix:");
+    pretty_print(&matrix);
+
+    let transposed = transpose(matrix);
+    println!("transposed:");
+    pretty_print(&transposed);
+}
+```
+
+## Variables
+Rust provides type safety via static typing. Variable bindings are immutable by default:
+```rust
+fn main() {
+    let x: i32 = 10;
+    println!("x: {x}");
+    x = 20;
+    println!("x: {x}");
+}
+```
+
+### Type Inference
+Rust will look at how the variable is _used_ to determine the type:
+```rust
+fn takes_u32(x: u32) {
+    println!("u32: {x}");
+}
+
+fn takes_i8(y: i8) {
+    println!("i8: {y}");
+}
+
+fn main() {
+    let x = 10;
+    let y = 20;
+
+    takes_u32(x);
+    takes_i8(y);
+    takes_u32(y);
+}
+```
+
+### Static and Constant Variables
+Global state is managed with static and constant variables.
+#### const
+```rust
+const DIGEST_SIZE: usize = 3;
+const ZERO: Option<u8> = Some(42);
+
+fn compute_digest(text: &str) -> [u8; DIGEST_SIZE] {
+    let mut digest = [ZERO.unwrap_or(0); DIGEST_SIZE];
+    for (idx, &b) in text.as_bytes().iter().enumerate() {
+        digest[idx % DIGEST_SIZE] = digest[idx % DIGEST_SIZE].wrapping_add(b);
+    }
+    digest
+}
+
+fn main() {
+    let digest = compute_digest("Hello");
+    println!("Digest: {digest:?}");
+}
+```
+
+#### static
+```rust
+static BANNER: &str = "Welcome to RustOS 3.14";
+
+fn main() {
+    println!("{BANNER}");
+}
+```
+This is useful for unsafe and embedded code, and the variable lives through the entirety of the program execution.
+
+### Scopes and Shadowing
+You can shadow variables, both those from outer scopes and variables from the same scope:
+```rust
+fn main() {
+    let a = 10;
+    println!("before: {a}");
+
+    {
+        let a = "hello";
+        println!("inner scope: {a}");
+
+        let a = true;
+        println!("shadowed in inner scope: {a}");
+    }
+
+    println!("after: {a}");
+}
+```
+
+## Memory Management
+Traditionally, languages have fallen into two broad categories:
+
+-   Full control via manual memory management: C, C++, Pascal, …
+-   Full safety via automatic memory management at runtime: Java, Python, Go, Haskell, …
+
+Rust offers a new mix, full control _and_ safety via compile time enforcement of correct memory management with an explicit ownership concept.
+
+### The Stack vs The Heap
+
+-   Stack: Continuous area of memory for local variables.
+    
+    -   Values have fixed sizes known at compile time.
+    -   Extremely fast: just move a stack pointer.
+    -   Easy to manage: follows function calls.
+    -   Great memory locality.
+
+-   Heap: Storage of values outside of function calls.
+    
+    -   Values have dynamic sizes determined at runtime.
+    -   Slightly slower than the stack: some book-keeping needed.
+    -   No guarantee of memory locality.

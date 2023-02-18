@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl.md",
-                "mode": "preview",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl.md",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl.md",
+                "file": "educations/rust/comprehensive-google-edition/day-1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cheatsheets/kubernetes/kubectl.md"
+                "file": "educations/rust/comprehensive-google-edition/day-1.md"
               }
             }
           },
@@ -190,11 +190,11 @@
   },
   "active": "610ee632ce842aa1",
   "lastOpenFiles": [
+    "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectx.md",
     "cheatsheets/databases/snowflake.md",
     "cheatsheets/misc/regex.md",
     "educations/rust/comprehensive-google-edition/day-1.md",
-    "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectl-work.md",
     "cheatsheets/Untitled.md",
     "educations/rust/comprehensive-google-edition/course-information.md",
