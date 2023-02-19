@@ -440,3 +440,75 @@ Rust offers a new mix, full control _and_ safety via compile time enforcement 
     -   Values have dynamic sizes determined at runtime.
     -   Slightly slower than the stack: some book-keeping needed.
     -   No guarantee of memory locality.
+
+### Stack Memory
+Creating a `String` puts fixed-sized data on the stack and dynamically sized data on the heap:
+```rust
+fn main() {
+    let s1 = String::from("Hello");
+}
+```
+![stack](/assets/Screenshot%202023-02-19%20at%2011.36.14.png)
+### Manual Memory Management
+You allocate and deallocate heap memory yourself.
+
+If not done with care, this can lead to crashes, bugs, security vulnerabilities, and memory leaks.
+
+### Scope-Based Memory Management
+Constructors and destructors let you hook into the lifetime of an object.
+
+By wrapping a pointer in an object, you can free memory when the object is destroyed. The compiler guarantees that this happens, even if an exception is raised.
+
+This is often called _resource acquisition is initialization_ (RAII) and gives you smart pointers.
+
+#### C++ Example
+```c++
+void say_hello(std::unique_ptr<Person> person) {
+  std::cout << "Hello " << person->name << std::endl;
+}
+
+```
+-   The `std::unique_ptr` object is allocated on the stack, and points to memory allocated on the heap.
+-   At the end of `say_hello`, the `std::unique_ptr` destructor will run.
+-   The destructor frees the `Person` object it points to.
+
+Special move constructors are used when passing ownership to a function:
+```c++
+std::unique_ptr<Person> person = find_person("Carla");
+say_hello(std::move(person));
+```
+
+### Automatic Memory Management
+An alternative to manual and scope-based memory management is automatic memory management:
+
+-   The programmer never allocates or deallocates memory explicitly.
+-   A garbage collector finds unused memory and deallocates it for the programmer.
+
+### Memory Management in Rust
+Memory management in Rust is a mix:
+
+-   Safe and correct like Java, but without a garbage collector.
+-   Depending on which abstraction (or combination of abstractions) you choose, can be a single unique pointer, reference counted, or atomically reference counted.
+-   Scope-based like C++, but the compiler enforces full adherence.
+-   A Rust user can choose the right abstraction for the situation, some even have no cost at runtime like C.
+
+It achieves this by modeling _ownership_ explicitly.
+
+## Ownership
+All variable bindings have a _scope_ where they are valid and it is an error to use a variable outside its scope:
+```rust
+struct Point(i32, i32);
+
+fn main() {
+    {
+        let point = Point(3, 4);
+        println!("x: {}", point.0);
+    }
+    println!("y: {}", point.1);
+}
+```
+-   At the end of the scope, the variable is _dropped_ and the data is freed.
+-   A destructor can run here to free up resources.
+-   We say that the variable _owns_ the value.
+
+### Move Semantics
