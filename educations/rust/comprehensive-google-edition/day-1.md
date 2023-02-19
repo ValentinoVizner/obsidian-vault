@@ -512,3 +512,183 @@ fn main() {
 -   We say that the variable _owns_ the value.
 
 ### Move Semantics
+An assignment will transfer ownership between variables:
+```rust
+fn main() {
+    let s1: String = String::from("Hello!");
+    let s2: String = s1;
+    println!("s2: {s2}");
+    // println!("s1: {s1}");
+}
+```
+-   The assignment of `s1` to `s2` transfers ownership.
+-   The data was _moved_ from `s1` and `s1` is no longer accessible.
+-   When `s1` goes out of scope, nothing happens: it has no ownership.
+-   When `s2` goes out of scope, the string data is freed.
+-   There is always _exactly_ one variable binding which owns a value.
+
+### Moved Strings in Rust
+```rust
+fn main() {
+    let s1: String = String::from("Rust");
+    let s2: String = s1;
+}
+```
+-   The heap data from `s1` is reused for `s2`.
+-   When `s1` goes out of scope, nothing happens (it has been moved from).
+Before move to `s2`:
+![[Screenshot 2023-02-19 at 19.49.44.png]]
+
+### Moves in Function Calls
+When you pass a value to a function, the value is assigned to the function parameter. This transfers ownership:
+```rust
+fn say_hello(name: String) {
+    println!("Hello {name}")
+}
+
+fn main() {
+    let name = String::from("Alice");
+    say_hello(name);
+    // say_hello(name); // returns error since name ownership moved to the function call before this one
+}
+```
+
+### Copying and Cloning
+While move semantics are the default, certain types are copied by default:
+```rust
+fn main() {
+    let x = 42;
+    let y = x;
+    println!("x: {x}");
+    println!("y: {y}");
+}
+```
+These types implement the `Copy` trait.
+
+You can opt-in your own types to use copy semantics:
+```rust
+#[derive(Copy, Clone, Debug)]
+struct Point(i32, i32);
+
+fn main() {
+    let p1 = Point(3, 4);
+    let p2 = p1;
+    println!("p1: {p1:?}");
+    println!("p2: {p2:?}");
+}
+```
+-   After the assignment, both `p1` and `p2` own their own data.
+-   We can also use `p1.clone()` to explicitly copy the data.
+How do you know if a type **implements** copy? (implements = can use) You can check the documentation. For example, here is the documentation for char:
+
+[https://doc.rust-lang.org/std/primitive.char.html](https://doc.rust-lang.org/std/primitive.char.html)
+
+On the left you can see **Trait Implementations**. You can see for example **Copy**, **Debug**, and **Display**. So you know that a `char`:
+
+-   is copied when you send it to a function (**Copy**)
+-   can use `{}` to print (**Display**)
+-   can use `{:?}` to print (**Debug**)
+```rust
+fn prints_number(number: i32) { // There is no -> so it's not returning anything
+                             // If number was not copy type, it would take it
+                             // and we couldn't use it again
+    println!("{}", number);
+}
+
+fn main() {
+    let my_number = 8;
+    prints_number(my_number); // Prints 8. prints_number gets a copy of my_number
+    prints_number(my_number); // Prints 8 again.
+                              // No problem, because my_number is copy type!
+}
+```
+But if you look at the documentation for String, it is not copy type.
+
+[https://doc.rust-lang.org/std/string/struct.String.html](https://doc.rust-lang.org/std/string/struct.String.html)
+On the left in **Trait Implementations** you can look in alphabetical order. A, B, C... there is no **Copy** in C. But there is **Clone**. **Clone** is similar to **Copy**, but usually needs more memory. Also, you have to call it with `.clone()` - it won't clone just by itself.
+
+In this example, `prints_country()` prints the country name, a `String`. We want to print it two times, but we can't:
+```rust
+fn prints_country(country_name: String) {
+    println!("{}", country_name);
+}
+
+fn main() {
+    let country = String::from("Kiribati");
+    prints_country(country);
+    prints_country(country); // ⚠️
+}
+
+```
+But now we understand the message:
+```shell
+error[E0382]: use of moved value: `country`
+ --> src\main.rs:4:20
+  |
+2 |     let country = String::from("Kiribati");
+  |         ------- move occurs because `country` has type `std::string::String`, which does not implement the `Copy` trait
+3 |     prints_country(country);
+  |                    ------- value moved here
+4 |     prints_country(country);
+  |                    ^^^^^^^ value used here after move
+```
+The important part is `which does not implement the Copy trait`. But in the documentation we saw that String implements the `Clone` trait. So we can add `.clone()` to our code. This creates a clone, and we send the clone to the function. Now `country` is still alive, so we can use it.
+```rust
+fn prints_country(country_name: String) {
+    println!("{}", country_name);
+}
+
+fn main() {
+    let country = String::from("Kiribati");
+    prints_country(country.clone()); // make a clone and give it to the function. Only the clone goes in, and country is still alive
+    prints_country(country);
+	// prints_country(country); // but not anymore since we did not use .clone()
+}
+```
+Of course, if the `String` is very large, `.clone()` can use a lot of memory. One `String` can be a whole book in length, and every time we call `.clone()` it will copy the book. So using `&` for a reference is faster, if you can. For example, this code pushes a `&str` onto a `String` and then makes a clone every time it gets used in a function:
+```rust
+fn get_length(input: String) { // Takes ownership of a String
+    println!("It's {} words long.", input.split_whitespace().count()); // splits to count the number of words
+}
+
+fn main() {
+    let mut my_string = String::new();
+    for _ in 0..50 {
+        my_string.push_str("Here are some more words "); // push the words on
+        get_length(my_string.clone()); // gives it a clone every time
+    }
+}
+```
+That's 50 clones. Here it is using a reference instead, which is better:
+```rust
+fn get_length(input: &String) {
+    println!("It's {} words long.", input.split_whitespace().count());
+}
+
+fn main() {
+    let mut my_string = String::new();
+    for _ in 0..50 {
+        my_string.push_str("Here are some more words ");
+        get_length(&my_string);
+    }
+}
+
+```
+Instead of 50 clones, it's zero.
+### Borrowing
+Instead of transferring ownership when calling a function, you can let a function _borrow_ the value:
+```rust
+#[derive(Debug)]
+struct Point(i32, i32);
+
+fn add(p1: &Point, p2: &Point) -> Point {
+    Point(p1.0 + p2.0, p1.1 + p2.1)
+}
+
+fn main() {
+    let p1 = Point(3, 4);
+    let p2 = Point(10, 20);
+    let p3 = add(&p1, &p2);
+    println!("{p1:?} + {p2:?} = {p3:?}");
+}
+```
