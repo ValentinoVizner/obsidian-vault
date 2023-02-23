@@ -816,28 +816,30 @@ impl std::fmt::Display for Book {
 
 impl Library {
     fn new() -> Library {
-        unimplemented!()
+        Library { books: Vec::new() }
     }
 
-    //fn len(self) -> usize {
-    //    unimplemented!()
-    //}
+    fn len(&self) -> usize {
+        self.books.len()
+    }
 
     fn is_empty(&self) -> bool {
-	    self.books.is_empty()
+        self.books.is_empty()
     }
 
-    //fn add_book(self, book: Book) {
-    //    unimplemented!()
-    //}
+    fn add_book(&mut self, book: Book) {
+        self.books.push(book)
+    }
 
-    //fn print_books(self) {
-    //    unimplemented!()
-    //}
+    fn print_books(&self) {
+        for book in &self.books {
+            println!("{}", book);
+        }
+    }
 
-    //fn oldest_book(self) -> Option<&Book> {
-    //    unimplemented!()
-    //}
+    fn oldest_book(&self) -> Option<&Book> {
+        self.books.iter().min_by_key(|book| book.year)
+    }
 }
 
 // This shows the desired behavior. Uncomment the code below and
@@ -845,20 +847,20 @@ impl Library {
 // method signatures, including the "self" parameter! You may
 // also need to update the variable bindings within main.
 fn main() {
-    let library = Library::new();
+    let mut library = Library::new();
 
     println!("Our library is empty: {}", library.is_empty());
+    println!("Our library is empty: {}", library.len());
+    library.add_book(Book::new("Lord of the Rings", 1954));
+    library.add_book(Book::new("Alice's Adventures in Wonderland", 1865));
+    library.print_books();
     //
-    //library.add_book(Book::new("Lord of the Rings", 1954));
-    //library.add_book(Book::new("Alice's Adventures in Wonderland", 1865));
+    match library.oldest_book() {
+        Some(book) => println!("My oldest book is {book}"),
+        None => println!("My library is empty!"),
+    }
     //
-    //library.print_books();
-    //
-    //match library.oldest_book() {
-    //    Some(book) => println!("My oldest book is {book}"),
-    //    None => println!("My library is empty!"),
-    //}
-    //
-    //println!("Our library has {} books", library.len());
+    println!("Our library has {} books", library.len());
 }
+
 ```
