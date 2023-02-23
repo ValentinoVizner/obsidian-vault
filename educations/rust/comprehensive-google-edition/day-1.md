@@ -689,6 +689,176 @@ fn main() {
     let p1 = Point(3, 4);
     let p2 = Point(10, 20);
     let p3 = add(&p1, &p2);
-    println!("{p1:?} + {p2:?} = {p3:?}");
+    let p4 = add(&p1, &p2);
+    println!("{p1:?} + {p2:?} = {p3:?} or {p4:?}");
+}
+```
+
+
+### Shared and Unique Borrows
+Rust puts constraints on the ways you can borrow values:
+
+-   You can have one or more `&T` values at any given time, _or_
+-   You can have exactly one `&mut T` value.
+```rust
+fn main() {
+    let mut a: i32 = 10;
+    let b: &i32 = &a;
+
+    {
+        let c: &mut i32 = &mut a;
+        *c = 20;
+    }
+
+    println!("a: {a}");
+    println!("b: {b}");
+}
+```
+
+### Lifetimes
+
+A borrowed value has a _lifetime_:
+
+-   The lifetime can be elided: `add(p1: &Point, p2: &Point) -> Point`.
+-   Lifetimes can also be explicit: `&'a Point`, `&'document str`.
+-   Read `&'a Point` as “a borrowed `Point` which is valid for at least the lifetime `a`”.
+-   Lifetimes are always inferred by the compiler: you cannot assign a lifetime yourself.
+    -   Lifetime annotations create constraints; the compiler verifies that there is a valid solution.
+
+### Lifetimes in Function Calls
+
+In addition to borrowing its arguments, a function can return a borrowed value:
+```rust
+#[derive(Debug)]
+struct Point(i32, i32);
+
+fn left_most<'a>(p1: &'a Point, p2: &'a Point) -> &'a Point {
+    if p1.0 < p2.0 { p1 } else { p2 }
+}
+
+fn main() {
+    let p1: Point = Point(10, 10);
+    let p2: Point = Point(20, 20);
+    let p3: &Point = left_most(&p1, &p2);
+    println!("left-most point: {:?}", p3);
+}
+```
+-   `'a` is a generic parameter, it is inferred by the compiler.
+-   Lifetimes start with `'` and `'a` is a typical default name.
+-   Read `&'a Point` as “a borrowed `Point` which is valid for at least the lifetime `a`”.
+    -   The _at least_ part is important when parameters are in different scopes.
+
+### Lifetimes in Data Structures
+
+If a data type stores borrowed data, it must be annotated with a lifetime:
+```rust
+#[derive(Debug)]
+struct Highlight<'doc>(&'doc str);
+
+fn erase(text: String) {
+    println!("Bye {text}!");
+}
+
+fn main() {
+    let text = String::from("The quick brown fox jumps over the lazy dog.");
+    let fox = Highlight(&text[4..19]);
+    let dog = Highlight(&text[35..43]);
+    // erase(text);
+    println!("{fox:?}");
+    println!("{dog:?}");
+}
+```
+
+
+## Exercises Part 2
+
+### Designing a Library
+
+We will learn much more about structs and the `Vec<T>` type tomorrow. For now, you just need to know part of its API:
+```rust
+fn main() {
+    let mut vec = vec![10, 20];
+	let b = vec![30, 40, 50];
+	vec.extend(b);
+    println!("middle value: {}", vec[vec.len() / 2]);
+    for item in vec.iter() {
+        println!("item: {item}");
+    }
+}
+```
+
+```rust
+struct Library {
+    books: Vec<Book>,
+}
+
+struct Book {
+    title: String,
+    year: u16,
+}
+
+impl Book {
+    // This is a constructor, used below.
+    fn new(title: &str, year: u16) -> Book {
+        Book {
+            title: String::from(title),
+            year,
+        }
+    }
+}
+
+// This makes it possible to print Book values with {}.
+impl std::fmt::Display for Book {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} ({})", self.title, self.year)
+    }
+}
+
+impl Library {
+    fn new() -> Library {
+        unimplemented!()
+    }
+
+    //fn len(self) -> usize {
+    //    unimplemented!()
+    //}
+
+    fn is_empty(&self) -> bool {
+	    self.books.is_empty()
+    }
+
+    //fn add_book(self, book: Book) {
+    //    unimplemented!()
+    //}
+
+    //fn print_books(self) {
+    //    unimplemented!()
+    //}
+
+    //fn oldest_book(self) -> Option<&Book> {
+    //    unimplemented!()
+    //}
+}
+
+// This shows the desired behavior. Uncomment the code below and
+// implement the missing methods. You will need to update the
+// method signatures, including the "self" parameter! You may
+// also need to update the variable bindings within main.
+fn main() {
+    let library = Library::new();
+
+    println!("Our library is empty: {}", library.is_empty());
+    //
+    //library.add_book(Book::new("Lord of the Rings", 1954));
+    //library.add_book(Book::new("Alice's Adventures in Wonderland", 1865));
+    //
+    //library.print_books();
+    //
+    //match library.oldest_book() {
+    //    Some(book) => println!("My oldest book is {book}"),
+    //    None => println!("My library is empty!"),
+    //}
+    //
+    //println!("Our library has {} books", library.len());
 }
 ```
