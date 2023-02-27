@@ -26,23 +26,13 @@
               "type": "markdown",
               "state": {
                 "file": "educations/rust/comprehensive-google-edition/day-1.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
-              }
-            }
-          },
-          {
-            "id": "0390be885f2a62e8",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.1.15"
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -186,10 +176,11 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "0390be885f2a62e8",
+  "active": "8534e8224c35a1c1",
   "lastOpenFiles": [
-    "assets/Screenshot 2023-02-19 at 19.49.44.png",
+    "toc.md",
     "educations/rust/comprehensive-google-edition/day-1.md",
+    "assets/Screenshot 2023-02-19 at 19.49.44.png",
     "assets.md",
     "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectl-work.md",

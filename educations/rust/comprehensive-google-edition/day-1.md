@@ -54,7 +54,7 @@ No undefined behavior at runtime:
 -   Array access is bounds checked.
 -   Integer overflow is defined.
 
-# Scalar Types
+## Scalar Types
 
 |                 | Types                                      | Literals                      |
 | --------------- | ------------------------------------------ | ----------------------------- |
@@ -75,7 +75,7 @@ The types have widths as follows:
 -   `char` is 32 bit wide,
 -   `bool` is 8 bit wide.
 
-# Compound Types
+## Compound Types
 |     | Types | Literals |
 | --- | ----- | -------- |
 |Arrays|`[T; N]`|`[20, 30, 40]`, `[0; 3]`|
@@ -100,7 +100,7 @@ fn main() {
 }
 ```
 
-# References
+## References
 Like C++, Rust has references:
 ```rust
 fn main() {
@@ -136,7 +136,7 @@ fn main() {
 -   Rust is tracking the lifetimes of all references to ensure they live long enough.
 -   We will talk more about borrowing when we get to ownership.
 
-# Slices
+## Slices
 
 A slice gives you a view into a larger collection:
 ```rust
@@ -150,7 +150,7 @@ fn main() {
 ```
 -   Slices borrow data from the sliced type
 
-# `String` vs `str`
+## `String` vs `str`
 
 We can now understand the two string types in Rust:
 ```rust
@@ -173,7 +173,7 @@ Rust terminology:
 -   `&str` an immutable reference to a string slice.
 -   `String` a mutable string buffer.
 
-# Functions
+## Functions
 Fizzbuzz:
 ```rust
 fn main() {
@@ -495,6 +495,7 @@ Memory management in Rust is a mix:
 It achieves this by modeling _ownership_ explicitly.
 
 ## Ownership
+[Here](https://itnext.io/rust-ownership-50-code-examples-96203fcf79ea) is great article with examples of ownershi.
 All variable bindings have a _scope_ where they are valid and it is an error to use a variable outside its scope:
 ```rust
 struct Point(i32, i32);
@@ -864,3 +865,85 @@ fn main() {
 }
 
 ```
+
+### Iterators and Ownership
+#### Iterator
+
+Traits are like interfaces: they describe behavior (methods) for a type. The `Iterator` trait simply says that you can call `next` until you get `None` back:
+```rust
+pub trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+You use this trait like this:
+```rust
+fn main() {
+    let v: Vec<i8> = vec![10, 20, 30];
+    let mut iter = v.iter();
+
+    println!("v[0]: {:?}", iter.next());
+    println!("v[1]: {:?}", iter.next());
+    println!("v[2]: {:?}", iter.next());
+    println!("No more items: {:?}", iter.next());
+}
+```
+What is the type returned by the iterator? Test your answer here:
+```rust
+fn main() {
+    let v: Vec<i8> = vec![10, 20, 30];
+    let mut iter = v.iter();
+
+    let v0: Option<&i8> = iter.next();
+    println!("v0: {v0:?}");
+}
+```
+
+#### IntoIterator
+
+The `Iterator` trait tells you how to _iterate_ once you have created an iterator. The related trait `IntoIterator` tells you how to create the iterator:
+```rust
+pub trait IntoIterator {
+    type Item;
+    type IntoIter: Iterator<Item = Self::Item>;
+
+    fn into_iter(self) -> Self::IntoIter;
+}
+```
+The syntax here means that every implementation of `IntoIterator` must declare two types:
+
+-   `Item`: the type we iterate over, such as `i8`,
+-   `IntoIter`: the `Iterator` type returned by the `into_iter` method.
+
+Note that `IntoIter` and `Item` are linked: the iterator must have the same `Item` type, which means that it returns `Option<Item>`
+
+Like before, what is the type returned by the iterator?
+```rust
+fn main() {
+    let v: Vec<String> = vec![String::from("foo"), String::from("bar")];
+    let mut iter = v.into_iter();
+
+    let v0: Option<String> = iter.next();
+    println!("v0: {v0:?}");
+}
+```
+
+#### for Loops
+
+Now that we know both `Iterator` and `IntoIterator`, we can build `for` loops. They call `into_iter()` on an expression and iterates over the resulting iterator:
+```rust
+fn main() {
+    let v: Vec<String> = vec![String::from("foo"), String::from("bar")];
+
+    for word in &v {
+        println!("word: {word}");
+    }
+
+    for word in v {
+        println!("word: {word}");
+    }
+}
+```
+What is the type of `word` in each loop?
+
+Experiment with the code above and then consult the documentation for [`impl IntoIterator for &Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html#impl-IntoIterator-for-%26%27a%20Vec%3CT%2C%20A%3E) and [`impl IntoIterator for Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html#impl-IntoIterator-for-Vec%3CT%2C%20A%3E) to check your answers.
