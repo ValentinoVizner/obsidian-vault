@@ -30,9 +30,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "0390be885f2a62e8",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.1.15"
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -176,7 +186,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "610ee632ce842aa1",
+  "active": "0390be885f2a62e8",
   "lastOpenFiles": [
     "assets/Screenshot 2023-02-19 at 19.49.44.png",
     "educations/rust/comprehensive-google-edition/day-1.md",
