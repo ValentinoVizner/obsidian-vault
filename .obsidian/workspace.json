@@ -30,9 +30,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "4e4a4079f2440ab0",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.1.16"
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -176,7 +186,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "8534e8224c35a1c1",
+  "active": "4e4a4079f2440ab0",
   "lastOpenFiles": [
     "toc.md",
     "educations/rust/comprehensive-google-edition/day-1.md",
