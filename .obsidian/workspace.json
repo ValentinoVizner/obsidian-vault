@@ -35,9 +35,11 @@
             "id": "4e4a4079f2440ab0",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.1.16"
+                "file": "cheatsheets/misc/regex.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -108,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "cheatsheets/misc/regex.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "cheatsheets/misc/regex.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md"
+                "file": "cheatsheets/misc/regex.md"
               }
             }
           },
@@ -188,6 +190,8 @@
   },
   "active": "4e4a4079f2440ab0",
   "lastOpenFiles": [
+    "cheatsheets/databases/snowflake.md",
+    "cheatsheets/databases/scylladb.md",
     "toc.md",
     "educations/rust/comprehensive-google-edition/day-1.md",
     "assets/Screenshot 2023-02-19 at 19.49.44.png",
@@ -195,7 +199,6 @@
     "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectl-work.md",
     "cheatsheets/kubernetes/kubectx.md",
-    "cheatsheets/databases/snowflake.md",
     "cheatsheets/misc/regex.md",
     "cheatsheets/Untitled.md",
     "educations/rust/comprehensive-google-edition/course-information.md"
