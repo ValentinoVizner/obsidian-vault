@@ -260,3 +260,157 @@ fn main() {
     println!("Hello, {}", name);  
 }
 ```
+
+# Iterator
+
+[Iterators](https://doc.rust-lang.org/std/iter/index.html) play an extremely important role when it comes to ownership of elements in a collection.
+
+In these examples we will use `Vec<String>`, intentionally using `String` as the element (which does not implement the `Copy` trait) so that we can demonstrate its move semantics in a vector.
+
+## **for-loop**
+Once we set `println` into`for` loop, we encounter problems:
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+    
+    for name in names {  
+        println!("{}", name);  
+    }  
+    
+    println!("Names: {:?}", names);  
+}
+```
+
+After adding `into_iter()`, we still encounter same problem, but we can borrow elements from `names` using `.iter()`:
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+  
+    for name in names.iter() {  
+        println!("{}", name);  
+    }  
+  
+    println!("Names: {:?}", names);  
+}
+```
+
+We can use a slice (which implements `IntoIterator`).
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+  
+    for name in &names {  
+        println!("{}", name);  
+    }  
+  
+    println!("Names: {:?}", names);  
+}
+```
+
+## **Functional programming**
+
+Using functional programming idioms makes it more obvious that iterators are involved when you want to iterate over elements (especially if you come from programming languages where you don’t have to deal with iterators directly).
+
+Unlike for-loops, there are no implicit `.into_iter()` calls. As such, for vectors, we always need to call `.iter()`, `.into_iter()`, etc. to get an iterator.
+This won't work without `.iter()`:
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+      
+    names.for_each(|name|  
+       println!("{}", name));  
+      
+    println!("{:?}", names);  
+}
+```
+
+And this will work:
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+      
+    names  
+        .iter()  
+        .for_each(|name|  
+           println!("{}", name));  
+      
+    println!("{:?}", names);  
+}
+```
+
+If you want to move the elements, use `.into_iter()`. However, note that we can’t use the vector afterwards:
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+    
+    names  
+        .into_iter()  
+        .for_each(|name|  
+           println!("{}", name));  
+    
+    println!("{:?}", names);   
+}
+```
+
+We have to redesign program such that we don’t use the moved elements
+```rust
+fn main() {  
+    let names = vec![  
+        String::from("John"),  
+        String::from("Jane"),  
+    ];  
+      
+    println!("{:?}", names);   
+  
+    names  
+        .into_iter()  
+        .for_each(|name|  
+           println!("{}", name));  
+}
+```
+
+# &str
+Shared references (`&T`) are also `Copy` (see [here](https://doc.rust-lang.org/std/marker/trait.Copy.html#when-can-my-type-be-copy)). Here is an example of a commonly used type, the string slice `&str`.
+We can pass `name` to `do_something` in Lines 3 and 4. Note that we are copying the _reference._, like this:
+```rust
+fn main() {  
+    let name: &'static str = "Rust";  
+    do_something(name);  
+    do_something(name);  
+}  
+  
+fn do_something(name: &str) {  
+    println!("Hello, {:?}!", name);  
+}
+```
+
+We can also `.clone()` just before passing `name` to `do_something` is redundant.
+```rust
+fn main() {  
+    let name: &'static str = "Rust";  
+    do_something(name.clone());  
+    do_something(name.clone());  
+}  
+  
+fn do_something(name: &str) {  
+    println!("Hello, {:?}!", name);  
+}
+```
