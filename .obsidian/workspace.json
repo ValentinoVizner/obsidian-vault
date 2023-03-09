@@ -25,26 +25,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "educations/rust/comprehensive-google-edition/day-1.md",
+                "file": "educations/rust/comprehensive-google-edition/borrowing-in-depth.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "4e4a4079f2440ab0",
+            "id": "f30a83f1ce9d4566",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "cheatsheets/misc/regex.md",
+                "file": "educations/rust/comprehensive-google-edition/day-2.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "cheatsheets/misc/regex.md",
+                "file": "educations/rust/comprehensive-google-edition/borrowing-in-depth.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "cheatsheets/misc/regex.md",
+                "file": "educations/rust/comprehensive-google-edition/borrowing-in-depth.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cheatsheets/misc/regex.md"
+                "file": "educations/rust/comprehensive-google-edition/borrowing-in-depth.md"
               }
             }
           },
@@ -171,7 +171,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -188,18 +188,20 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "4e4a4079f2440ab0",
+  "active": "610ee632ce842aa1",
   "lastOpenFiles": [
+    "educations/rust/comprehensive-google-edition/day-1.md",
+    "educations/rust/comprehensive-google-edition/borrowing-in-depth.md",
+    "educations/rust/comprehensive-google-edition/day-2.md",
+    "cheatsheets/misc/regex.md",
     "cheatsheets/databases/snowflake.md",
     "cheatsheets/databases/scylladb.md",
     "toc.md",
-    "educations/rust/comprehensive-google-edition/day-1.md",
     "assets/Screenshot 2023-02-19 at 19.49.44.png",
     "assets.md",
     "cheatsheets/kubernetes/kubectl.md",
     "cheatsheets/kubernetes/kubectl-work.md",
     "cheatsheets/kubernetes/kubectx.md",
-    "cheatsheets/misc/regex.md",
     "cheatsheets/Untitled.md",
     "educations/rust/comprehensive-google-edition/course-information.md"
   ]
