@@ -16,5 +16,11 @@
   "CG@@title-heading": "Inter.",
   "CG@@CG-workspace-background-image-custom-option": "url(\"https://images.wallpapersden.com/image/download/artistic-landscape-view_bGhlaGmUmZqaraWkpJRmbmdlrWZlbWU.jpg\")",
   "things-style@@default-font-color": false,
-  "CG@@CG-workspace-background-brightness": 0.9
+  "CG@@CG-workspace-background-brightness": 0.9,
+  "catppuccin-theme-settings@@catppuccin-theme-dark": "ctp-mocha",
+  "catppuccin-theme-settings@@catppuccin-theme-accents": "ctp-accent-green",
+  "catppuccin-icon-styles@@ctp-icon-hide": false,
+  "catppuccin-interface-styles@@ctp-bold-folder-title": true,
+  "anuppuccin-theme-settings@@anuppuccin-theme-accents": "ctp-accent-green",
+  "shiba-theme-settings@@shiba-accent-colors": "accent-green"
 }

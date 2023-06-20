@@ -6,7 +6,7 @@
 - Ownership: move semantics, copying and cloning, borrowing, and lifetimes.
 
 Small example of Rust code:
-```rust
+```rust !tangle:test/example.rs
 fn main() {              // Program entry point
     let mut x: i32 = 6;  // Mutable variable binding
     print!("{x}");       // Macro for printing, like printf
